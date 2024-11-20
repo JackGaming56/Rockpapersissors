@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rock, Paper, Scissors</title>
+  <style>
+    body {
+      text-align: center;
+    }
+
+    .game-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 300px;
+    }
+
+    .game-message {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <h1>Rock, Paper, Scissors</h1>
+    <div class="game-message"></div>
+    <button onclick="play('rock')">Rock</button>
+    <button onclick="play('paper')">Paper</button>
+    <button onclick="play('scissors')">Scissors</button>
+  </div>
+
+  <script>
+    function play(playerChoice) {
+      var choices = ['rock', 'paper', 'scissors'];
+      var computerChoice = choices[Math.floor(Math.random() * choices.length)];
+
+      var result = determineWinner(playerChoice, computerChoice);
+
+      var message = `You chose ${playerChoice}. The computer chose ${computerChoice}. `;
+      if (result === 'win') {
+        message += 'You win!';
+      } else if (result === 'lose') {
+        message += 'You lose!';
+      } else {
+        message += 'It\'s a tie!';
+      }
+
+      document.querySelector('.game-message').textContent = message;
+    }
+
+    function determineWinner(playerChoice, computerChoice) {
+      if (playerChoice === computerChoice) {
+        return 'tie';
+      }
+
+      if (
+        (playerChoice === 'rock' && computerChoice === 'scissors') ||
+        (playerChoice === 'paper' && computerChoice === 'rock') ||
+        (playerChoice === 'scissors' && computerChoice === 'paper')
+      ) {
+        return 'win';
+      }
+
+      return 'lose';
+    }
+  </script>
+</body>
+</html>
